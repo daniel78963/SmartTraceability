@@ -54,14 +54,22 @@ namespace SmartTraceability.Desktop.Views
             // 
             // btnHome
             // 
-            this.btnHome.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnHome.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnHome.FlatAppearance.BorderSize = 0;
+            this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHome.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnHome.IconChar = FontAwesome.Sharp.IconChar.Home;
             this.btnHome.IconColor = System.Drawing.Color.Black;
             this.btnHome.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnHome.Location = new System.Drawing.Point(268, 24);
+            this.btnHome.IconSize = 30;
+            this.btnHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHome.Location = new System.Drawing.Point(241, 0);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(75, 23);
+            this.btnHome.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnHome.Size = new System.Drawing.Size(120, 80);
             this.btnHome.TabIndex = 1;
-            this.btnHome.Text = "iconButton1";
+            this.btnHome.Text = "Home";
+            this.btnHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHome.UseVisualStyleBackColor = true;
             // 
             // pnlLogo
