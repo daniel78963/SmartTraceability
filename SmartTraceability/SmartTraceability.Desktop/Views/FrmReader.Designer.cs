@@ -68,6 +68,7 @@ namespace SmartTraceability.Desktop.Views
             this.btnRead.Text = "Start Read";
             this.btnRead.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRead.UseVisualStyleBackColor = true;
+            this.btnRead.Click += new System.EventHandler(this.btnRead_Click);
             // 
             // FrmReader
             // 
