@@ -37,7 +37,7 @@ namespace SmartTraceability.Desktop.Views
             //    MessageBox.Show("Select port", "Smart Traceability", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             //    toolStripStatusLabel1.Text = "First select the port to start reading";
             //}
+
         }
-    }
     }
 }
