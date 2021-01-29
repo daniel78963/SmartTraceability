@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartTraceability.Desktop.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,7 +10,11 @@ using System.Windows.Forms;
 namespace SmartTraceability.Desktop.Views
 {
     public partial class FrmReader : Form
-    {
+    { 
+        private ReadTask readtask;
+        //private UnitOfWork unitOfWork = new UnitOfWork();
+        //private ApiService apiService; 
+
         public FrmReader()
         {
             InitializeComponent();
@@ -37,7 +42,17 @@ namespace SmartTraceability.Desktop.Views
             //    MessageBox.Show("Select port", "Smart Traceability", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             //    toolStripStatusLabel1.Text = "First select the port to start reading";
             //}
+        }
 
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            if (readtask != null)
+            {
+                readtask.Stop();
+                txtRead.AppendText("Reading stopped");
+                toolStripStatusLabel1.Text = "Reading stopped";
+            }
+            pcbReading.IconColor = Color.Gray;
         }
     }
 }
