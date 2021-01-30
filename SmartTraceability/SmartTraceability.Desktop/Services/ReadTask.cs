@@ -28,8 +28,10 @@ namespace SmartTraceability.Desktop.Services
         public event EventHandler<ReadTaskResponse> Callback3;
 
         // Constructor de la clase HeavyTask
-        public ReadTask(int portBaudRate)
+        //public ReadTask(int portBaudRate)
+        public ReadTask(SerialPort _sp)        
         {
+            _serialPort = _sp;
             // Importante actualizar el valor de SyncContext en el constructor con
             // el valor de SynchronizationContext del AsyncOperationManager
             SyncContext = AsyncOperationManager.SynchronizationContext;
@@ -49,24 +51,24 @@ namespace SmartTraceability.Desktop.Services
             string name;
             string message;
             StringComparer stringComparer = StringComparer.OrdinalIgnoreCase;
-            //Thread readThread = new Thread(Read);
+            ////Thread readThread = new Thread(Read);
 
-            // Create a new SerialPort object with default settings.
-            _serialPort = new SerialPort();
+            //// Create a new SerialPort object with default settings.
+            //_serialPort = new SerialPort();
 
-            // Allow the user to set the appropriate properties.
-            _serialPort.PortName = "COM3";
-            //_serialPort.BaudRate = 9600;
-            _serialPort.BaudRate = portBaudRate;
+            //// Allow the user to set the appropriate properties.
+            //_serialPort.PortName = "COM4";
+            ////_serialPort.BaudRate = 9600;
+            //_serialPort.BaudRate = portBaudRate;
 
-            _serialPort.Parity = (Parity)Enum.Parse(typeof(Parity), "None", true);
-            _serialPort.DataBits = 8;
-            _serialPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), "One", true);
-            _serialPort.Handshake = (Handshake)Enum.Parse(typeof(Handshake), "None", true);
+            //_serialPort.Parity = (Parity)Enum.Parse(typeof(Parity), "None", true);
+            //_serialPort.DataBits = 8;
+            //_serialPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), "One", true);
+            //_serialPort.Handshake = (Handshake)Enum.Parse(typeof(Handshake), "None", true);
 
-            // Set the read/write timeouts
-            _serialPort.ReadTimeout = 500;
-            _serialPort.WriteTimeout = 500;
+            //// Set the read/write timeouts
+            //_serialPort.ReadTimeout = 500;
+            //_serialPort.WriteTimeout = 500;
 
             _serialPort.Open();
         }

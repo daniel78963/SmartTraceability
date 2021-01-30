@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+using System.IO.Ports;
 
 namespace SmartTraceability.Desktop.Views
 {
@@ -16,6 +17,7 @@ namespace SmartTraceability.Desktop.Views
         private ReadTask readtask;
         //private UnitOfWork unitOfWork = new UnitOfWork();
         //private ApiService apiService; 
+        private static SerialPort _serialPort;
 
         public FrmReader()
         {
@@ -48,7 +50,9 @@ namespace SmartTraceability.Desktop.Views
                 }
                 else
                 {
-                    readtask = new ReadTask(9600);
+                    //readtask = new ReadTask(9600);
+                    SetSerialPort();
+                    readtask = new ReadTask(_serialPort);
                     readtask.Callback3 += CallbackChangeText;
                     readtask.Start();
                     pcbReading.IconColor = Color.FromArgb(0, 204, 68);
@@ -60,6 +64,26 @@ namespace SmartTraceability.Desktop.Views
                 MessageBox.Show("Select port", "Smart Traceability", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 toolStripStatusLabel1.Text = "First select the port to start reading";
             }
+        }
+
+        private SerialPort SetSerialPort()
+        {
+            // Create a new SerialPort object with default settings.
+            _serialPort = new SerialPort();
+
+            // Allow the user to set the appropriate properties.
+            _serialPort.PortName = "COM4";
+            _serialPort.BaudRate = 9600;
+
+            _serialPort.Parity = (Parity)Enum.Parse(typeof(Parity), "None", true);
+            _serialPort.DataBits = 8;
+            _serialPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), "One", true);
+            _serialPort.Handshake = (Handshake)Enum.Parse(typeof(Handshake), "None", true);
+
+            // Set the read/write timeouts
+            _serialPort.ReadTimeout = 500;
+            _serialPort.WriteTimeout = 500;
+            return _serialPort;
         }
 
         private void CallbackChangeText(object sender, ReadTaskResponse responseTask)
