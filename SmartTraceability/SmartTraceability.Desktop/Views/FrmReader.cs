@@ -191,6 +191,7 @@ namespace SmartTraceability.Desktop.Views
             {
                 readtask.Stop();
                 txtRead.AppendText("Reading stopped");
+                txtRead.AppendText(Environment.NewLine);
                 toolStripStatusLabel1.Text = "Reading stopped";
             }
             pcbReading.IconColor = Color.Gray;

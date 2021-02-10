@@ -29,7 +29,7 @@ namespace SmartTraceability.Desktop.Services
 
         // Constructor de la clase HeavyTask
         //public ReadTask(int portBaudRate)
-        public ReadTask(SerialPort _sp)        
+        public ReadTask(SerialPort _sp)
         {
             _serialPort = _sp;
             // Importante actualizar el valor de SyncContext en el constructor con
@@ -135,11 +135,13 @@ namespace SmartTraceability.Desktop.Services
                     try
                     {
                         message = _serialPort.ReadLine();
+                        //message = (_serialPort.IsOpen) ? _serialPort.ReadLine() : string.Empty;
                         // Ejecutar segundo callback desde el segundo proceso al primero
                         SyncContext.Post(e => triggerCallback3(
                             new ReadTaskResponse(message)
                         ), null);
                     }
+                    catch (OperationCanceledException) { }
                     catch (TimeoutException) { }
                     catch (IOException)
                     {
@@ -160,18 +162,6 @@ namespace SmartTraceability.Desktop.Services
         }
 
         //// Métodos que ejecutan los callback si y solo si fueron declarados durante la instanciación de la clase HeavyTask
-        //private void triggerCallback1(HeavyTaskResponse response)
-        //{
-        //    // Si el primer callback existe, ejecutarlo con la información dada
-        //    Callback1?.Invoke(this, response);
-        //}
-
-        //private void triggerCallback2(HeavyTaskResponse response)
-        //{
-        //    // Si el segundo callback existe, ejecutarlo con la información dada
-        //    Callback2?.Invoke(this, response);
-        //}
-
         private void triggerCallback3(ReadTaskResponse response)
         {
             // Si el segundo callback existe, ejecutarlo con la información dada
